@@ -1,0 +1,29 @@
+{
+    "name": "comyo-media/shipcloud-php",
+    "description": "shipcloud API v1 PHP 5.4+ library",
+    "keywords": [
+        "php",
+        "shipcloud",
+        "api"
+    ],
+    "authors": [
+        {
+            "name": "comyo.media",
+            "email": "support@comyo-media.de"
+        },
+        {
+            "name": "Dennis Oderwald",
+            "email": "oderwald@comyo-media.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "guzzlehttp/guzzle": "~5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "ComyoMedia\\Shipcloud\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
