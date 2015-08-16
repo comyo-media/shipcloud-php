@@ -2,9 +2,9 @@
 
 namespace ComyoMedia\Shipcloud\Http;
 
-use GuzzleHttp\Message\RequestInterface;
+use Psr\Http\Message\RequestInterface;
 
 interface ClientInterface
 {
-    public function send(RequestInterface $request);
+    public function send(RequestInterface $request, array $options = []);
 }

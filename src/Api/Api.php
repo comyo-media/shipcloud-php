@@ -16,19 +16,19 @@ abstract class Api implements ApiInterface
 
     public function get($uri = null, $parameters = [])
     {
-        return $this->execute('get', $uri, $parameters)->json();
+        return json_decode($this->execute('get', $uri, $parameters)->getBody(), true);
     }
 
-    public function post($uri = null, $parameters = [])
+    public function post($uri = null, $parameters = [], $body = [])
     {
-        return $this->execute('post', $uri, $parameters)->json();
+        return json_decode($this->execute('post', $uri, $parameters, $body)->getBody(), true);
     }
 
     public function execute($httpMethod, $uri, array $parameters = [], array $body = [])
     {
         return $this->getClient()->{$httpMethod}("{$uri}", [
-            'query' => $parameters,
-            'body'  => $body
+            'query'       => $parameters,
+            'form_params' => $body
         ]);
     }
 
