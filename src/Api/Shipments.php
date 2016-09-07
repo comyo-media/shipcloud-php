@@ -14,6 +14,11 @@ class Shipments extends Api
         return $this->get("shipments/{$id}");
     }
 
+    public function delete($id)
+    {
+        return $this->delete("shipments/{$id}");
+    }
+
     public function all($parameters = [])
     {
         return $this->get('shipments', $parameters);
