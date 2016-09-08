@@ -2,6 +2,7 @@
 
 namespace ComyoMedia\Shipcloud\Api;
 
+use ComyoMedia\Shipcloud\Exception\ShipcloudException;
 use ComyoMedia\Shipcloud\Http\Client;
 use ComyoMedia\Shipcloud\ConfigInterface;
 
@@ -31,10 +32,23 @@ abstract class Api implements ApiInterface
 
     public function execute($httpMethod, $uri, array $parameters = [], array $body = [])
     {
-        return $this->getClient()->{$httpMethod}("{$uri}", [
-            'query'       => $parameters,
-            'json' => $body
-        ]);
+        try
+        { 
+            return $response = $this->getClient()->{$httpMethod}("{$uri}", [
+                'query' => $parameters,
+                'json' => $body
+            ]); 
+        }
+        catch (\GuzzleHttp\Exception\RequestException $re)
+        {
+            $response = $re->getResponse();           
+            $errorMessageArray = json_decode($response->getBody()->getContents(),true);
+            $errorMessage="";            
+            foreach($errorMessageArray["errors"] as $error){
+                $errorMessage.=$error;
+            }
+            throw new ShipcloudException($errorMessage, $response->getStatusCode());          
+        }
     }
 
     protected function getClient()
