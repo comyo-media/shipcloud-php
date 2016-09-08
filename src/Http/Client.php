@@ -19,7 +19,8 @@ class Client extends \GuzzleHttp\Client implements ClientInterface
             'base_uri' => 'https://api.shipcloud.io/v1/',
             'auth' => [$apiKey, null],
             'headers' => [
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
             ]
         ]);
     }
