@@ -43,9 +43,11 @@ abstract class Api implements ApiInterface
         {
             $response = $re->getResponse();           
             $errorMessageArray = json_decode($response->getBody()->getContents(),true);
-            $errorMessage="";            
-            foreach($errorMessageArray["errors"] as $error){
-                $errorMessage.=$error;
+            $errorMessage="";
+            if(array_key_exists("errors", $errorMessageArray)) {         
+                foreach($errorMessageArray["errors"] as $error) {
+                    $errorMessage .= "Shipcloud Error: " . $error . "\n";
+                }
             }
             throw new ShipcloudException($errorMessage, $response->getStatusCode());          
         }
