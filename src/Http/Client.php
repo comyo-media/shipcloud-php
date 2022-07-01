@@ -6,6 +6,7 @@ use GuzzleHttp\Query;
 use GuzzleHttp\Event\BeforeEvent;
 use GuzzleHttp\Exception\ClientException;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class Client extends \GuzzleHttp\Client implements ClientInterface
 {
@@ -24,7 +25,7 @@ class Client extends \GuzzleHttp\Client implements ClientInterface
         ]);
     }
 
-    public function send(RequestInterface $request, array $options = [])
+    public function send(RequestInterface $request, array $options = []): ResponseInterface
     {
         return parent::send($request, $options);
     }
